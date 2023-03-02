@@ -1,3 +1,4 @@
 # QUIZ-GAME
 <b>CONTRIBUTORS</b> VINAY SACHIN
-@vinay-s36 @sachinpro@123
+<br>
+@github.com/vinay-s36 @github.com/sachinpro@123
