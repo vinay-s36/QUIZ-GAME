@@ -1,4 +1,3 @@
-#pragma warning(disable:4996)
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
@@ -6,23 +5,24 @@
 int help();
 int start();
 int score();
+int i = 0;
 struct play {
     char name[20];
     int score1;
-}p;
+}p[10];
 
 int main()
 {
 
-    int a;
+    int choice;
     printf("\t\t        ----------------------------------          \n");
     printf("\t\t                 MINI QUIZ GAME                     \n");
     printf("\t\t        ----------------------------------          \n\n");
     printf("\t\t\t-->Press 1 to start the game\n\t\t\t-->press 2 to see score sheet\n\t\t\t-->press 3 to see game help\n\t\t\t-->Press 0 to exit");
     printf("\n\n\t\t\tEnter your choice:");
-    scanf("%d", &a);
+    scanf("%d", &choice);
     system("cls");
-    switch (a)
+    switch (choice)
     {
     case 1:
         start();
@@ -41,7 +41,7 @@ int main()
 
 int help()
 {
-    int b;
+    int choice;
     printf("\n >> There will be a total of 10 questions");
     printf("\n >> You will be given 4 options and you have to press 1, 2 ,3 or 4 for the right option");
     printf("\n >> Each question will carry 5 points");
@@ -50,9 +50,9 @@ int help()
     printf("\n >> There is no negative marking for wrong answer");
     printf("\n\n ************************* BEST OF LUCK *************************\n\n");
     printf("\nContinue playing ? (1 for YES/0 for NO) :");
-    scanf("%d", &b);
+    scanf("%d", &choice);
     system("cls");
-    if (b == 1)
+    if (choice == 1)
     {
         start();
     }
@@ -65,14 +65,12 @@ int help()
 
 int start()
 {
-    FILE* fp;
-    fp = fopen("play.txt", "a");
-    int score = 0, c;
+    int score = 0, choice;
     char guess;
     printf("ENTER YOUR NAME:");
-    scanf("%s", p.name);
+    scanf("%s", p[i].name);
     system("cls");
-    printf("HI %s ALL THE BEST FOR THE QUIZ!!\n", p.name);
+    printf("HI %s ALL THE BEST FOR THE QUIZ!!\n", p[i].name);
     printf("\nPRESS ANY KEY TO CONTINUE");
     getch();
     system("cls");
@@ -121,20 +119,19 @@ int start()
         getch();
         system("cls");
     }
-    p.score1 = score;
-    printf("\nNAME:%s\nSCORE=%d/50", p.name, p.score1);
+    p[i].score1 = score;
+    printf("\nNAME:%s\nSCORE=%d/50", p[i].name, p[i].score1);
     if (score > 40)printf("\nRating: * * * * *");
-    else if (p.score1 > 30 && p.score1 <= 40)printf("\nRating: * * * *");
-    else if (p.score1 > 20 && p.score1 <= 30)printf("\nRating: * * * ");
-    else if (p.score1 > 10 && p.score1 <= 20)printf("\nRating: * *");
-    else if (p.score1 > 0 && p.score1 <= 10)printf("\nRating: *");
+    else if (p[i].score1 > 30 && p[i].score1 <= 40)printf("\nRating: * * * *");
+    else if (p[i].score1 > 20 && p[i].score1 <= 30)printf("\nRating: * * * ");
+    else if (p[i].score1 > 10 && p[i].score1 <= 20)printf("\nRating: * *");
+    else if (p[i].score1 > 0 && p[i].score1 <= 10)printf("\nRating: *");
     else printf("\nRating:NULL");
-    fprintf(fp, "%s\t%d\n", p.name, p.score1);
-    fclose(fp);
+    i++;
     printf("\n\n-->Press 1 to go back to main menu\n-->Press 0 to exit\n");
-    scanf("%d", &c);
+    scanf("%d", &choice);
     system("cls");
-    switch (c)
+    switch (choice)
     {
 
     case 1:
@@ -148,27 +145,30 @@ int start()
 
 int score()
 {
-    int d;
-    FILE* fp;
-    fp = fopen("play.txt", "r");
-    if (fp == NULL)
+    int choice, j, k, max;
+    struct play temp;
+    printf("\n************************** SCORE SHEET ***************************\n\n");
+    printf("NAME\t\tSCORE\n");
+    for (j = 0; j < i - 1; j++)
     {
-        printf("\nNo games played yet!\n");
-    }
-    else
-    {
-        printf("\n************************** SCORE SHEET ***************************\n\n");
-        printf("NAME\t\tSCORE\n");
-        while (fscanf(fp, "%s %d", p.name, &p.score1) != EOF)
+        max = j;
+        for (k = j + 1; k < i; k++)
         {
-            printf("%s\t\t%d\n", p.name, p.score1);
+            if (p[k].score1 > p[max].score1)
+                max = k;
         }
-        fclose(fp);
+        temp = p[j];
+        p[j] = p[max];
+        p[max] = temp;
+    }
+    for (j = 0; j < i; j++)
+    {
+        printf("%s\t\t%d\n", p[j].name, p[j].score1);
     }
     printf("\n\n-->Press 1 to go back to main menu\n-->Press 0 to exit\n");
-    scanf("%d", &d);
+    scanf("%d", &choice);
     system("cls");
-    switch (d)
+    switch (choice)
     {
     case 1:
         main();
@@ -178,6 +178,3 @@ int score()
     }
     return 0;
 }
-
-
-
