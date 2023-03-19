@@ -1,4 +1,4 @@
-# QUIZ-GAME
+# QUIZ-GAME USING C
 
-## CONTRIBUTORS:  [VINAY](https://github.com/vinay-s36) [SACHIN](https://github.com/assistantgoogle)
+## CONTRIBUTORS:  <i>[VINAY](https://github.com/vinay-s36) [SACHIN](https://github.com/assistantgoogle)</i>
 
