@@ -1,4 +1,3 @@
-# QUIZ-GAME USING C
+## QUIZ-GAME USING C
 
-## CONTRIBUTORS:  <i>[VINAY](https://github.com/vinay-s36) [SACHIN](https://github.com/assistantgoogle)</i>
-
+#### Contributors: [Vinay](https://github.com/vinay-s36) [Sachin](https://github.com/assistantgoogle)
